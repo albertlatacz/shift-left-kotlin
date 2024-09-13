@@ -7,21 +7,16 @@ import java.io.File
 
 class GenerateGitHubAction : ShiftLeftModulePlugin("generateGitHubAction") {
     override fun processModule(descriptor: Descriptor, root: File) {
-        descriptor.writeGitHubActionsFileTo(root)
+        val actionsDir = root.resolve(".github").resolve("workflows")
+        val target = actionsDir.resolve("${descriptor.module.name}-build.yml")
+        target.writeText(
+            listOf(
+                preamble(descriptor.module, descriptor.dependencies),
+                buildWithGradle(descriptor),
+            ).joinToString("")
+        )
     }
 }
-
-fun Descriptor.writeGitHubActionsFileTo(root: File) {
-    val actionsDir = root.resolve(".github").resolve("workflows")
-    val target = actionsDir.resolve("${module.name}-build.yml")
-    target.writeText(githubActionsText(this))
-}
-
-fun githubActionsText(project: Descriptor): String =
-    listOf(
-        preamble(project.module, project.dependencies),
-        buildWithGradle(project),
-    ).joinToString("")
 
 private fun preamble(module: Module, dependencies: Set<Module>): String {
     val paths = listOf("*.kts", module.glob) +

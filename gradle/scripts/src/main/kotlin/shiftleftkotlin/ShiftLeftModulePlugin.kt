@@ -7,7 +7,7 @@ import org.gradle.kotlin.dsl.findByType
 import shiftleftkotlin.Team.TEAM1
 import java.io.File
 
-abstract class ShiftLeftModulePlugin(private val taskName: String) : Plugin<Project> {
+abstract class ShiftLeftModulePlugin(protected val taskName: String) : Plugin<Project> {
     override fun apply(project: Project) {
         val extension = project.extensions.run {
             findByType<ShiftLeftModule>() ?: create<ShiftLeftModule>("ShiftLeftModule")

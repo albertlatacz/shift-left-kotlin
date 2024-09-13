@@ -6,7 +6,7 @@ import java.io.File
 
 class GenerateBuildOverview : ShiftLeftModulePlugin("generateBuildOverview") {
     override fun processModule(descriptor: Descriptor, root: File) {
-        synchronized("generateBuildOverview") {
+        synchronized(taskName) {
             val file = File(root, "Builds.md")
             val existing = if (file.exists()) file.readLines() else emptyList()
 
