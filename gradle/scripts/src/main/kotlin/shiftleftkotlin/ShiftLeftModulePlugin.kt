@@ -1,12 +1,10 @@
-package shiftleftkotlin.gradle
+package shiftleftkotlin
 
-import shiftleftkotlin.domain.Team
-import shiftleftkotlin.domain.Descriptor
-import shiftleftkotlin.domain.Module
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.findByType
+import shiftleftkotlin.Team.TEAM1
 import java.io.File
 
 abstract class ShiftLeftModulePlugin(private val taskName: String) : Plugin<Project> {
@@ -22,7 +20,7 @@ abstract class ShiftLeftModulePlugin(private val taskName: String) : Plugin<Proj
                 val module = Module(project.path)
                 processModule(
                     descriptor = Descriptor(
-                        owner = extension.team.getOrElse(Team.TEAM1),
+                        owner = extension.team.getOrElse(TEAM1),
                         module = module,
                         dependencies = project.allRuntimeDependencies()
                     ),

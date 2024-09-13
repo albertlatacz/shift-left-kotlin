@@ -1,6 +1,5 @@
-package shiftleftkotlin.gradle
+package shiftleftkotlin
 
-import shiftleftkotlin.domain.Module
 import org.gradle.api.Project
 import org.gradle.api.artifacts.ProjectDependency
 

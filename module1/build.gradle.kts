@@ -1,5 +1,5 @@
-import shiftleftkotlin.domain.Team.TEAM1
-import shiftleftkotlin.gradle.ShiftLeftModule
+import shiftleftkotlin.ShiftLeftModule
+import shiftleftkotlin.Team.TEAM1
 
 plugins {
     id("shiftleft-module")

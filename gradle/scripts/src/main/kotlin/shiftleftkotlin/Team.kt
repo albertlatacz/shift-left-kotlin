@@ -1,4 +1,4 @@
-package shiftleftkotlin.domain
+package shiftleftkotlin
 
 enum class Team {
     TEAM1,

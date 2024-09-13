@@ -1,4 +1,4 @@
-package shiftleftkotlin.domain
+package shiftleftkotlin
 
 data class Descriptor(
     val owner: Team,
