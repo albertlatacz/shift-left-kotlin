@@ -19,4 +19,4 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
           cache: 'gradle'
-      - run: ./gradlew :module1:check :module1:installDist
+      - run: ./gradlew :module1:check
