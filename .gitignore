@@ -1,0 +1,17 @@
+# OS X
+.DS_Store
+
+# Env
+.envrc
+.java-version
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+.run/
+
+**/build/*
+**/.gradle/
+**/.kotlin/
