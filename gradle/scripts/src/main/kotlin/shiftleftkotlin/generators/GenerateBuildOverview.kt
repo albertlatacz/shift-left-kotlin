@@ -1,5 +1,7 @@
-package shiftleftkotlin
+package shiftleftkotlin.generators
 
+import shiftleftkotlin.Descriptor
+import shiftleftkotlin.ShiftLeftModulePlugin
 import java.io.File
 
 class GenerateBuildOverview : ShiftLeftModulePlugin("generateBuildOverview") {

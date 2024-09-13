@@ -1,4 +1,4 @@
-import shiftleftkotlin.GenerateBuildOverview
+import shiftleftkotlin.generators.GenerateBuildOverview
 
 apply<GenerateBuildOverview>()
 
