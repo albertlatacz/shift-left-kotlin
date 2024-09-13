@@ -8,7 +8,6 @@ on:
       - '*.kts'
       - 'module2/**'
       - '.github/workflows/module2-build.yml'
-
 jobs:
   build:
     runs-on: ubuntu-latest
