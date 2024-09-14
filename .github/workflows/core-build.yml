@@ -1,4 +1,4 @@
-name: module2-build
+name: core-build
 on:
   workflow_dispatch: 
   push:
@@ -6,10 +6,8 @@ on:
       - main
     paths:
       - '*.kts'
-      - 'module2/**'
       - 'core/**'
-      - 'module1/**'
-      - '.github/workflows/module2-build.yml'
+      - '.github/workflows/core-build.yml'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,4 +18,4 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
           cache: 'gradle'
-      - run: ./gradlew :module2:check
+      - run: ./gradlew :core:check

@@ -4,5 +4,6 @@ pluginManagement {
     includeBuild("gradle/scripts")
 }
 
+include("core")
 include("module1")
 include("module2")

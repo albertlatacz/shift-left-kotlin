@@ -5,5 +5,6 @@
 ## Ownership
 This module is maintained by *TEAM2*
 
-## Dependencies
+    ## Dependencies
+    - [core](https://github.com/albertlatacz/shift-left-kotlin/tree/main/core) 
 - [module1](https://github.com/albertlatacz/shift-left-kotlin/tree/main/module1) 
