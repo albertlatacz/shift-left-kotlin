@@ -1,9 +1,7 @@
 import shiftleftkotlin.Team.TEAM2
 import shiftleftkotlin.ShiftLeftModule
 
-plugins {
-    id("shiftleft-module")
-}
+apply(plugin = "shiftleft-module")
 
 configure<ShiftLeftModule> {
     team.set(TEAM2)
