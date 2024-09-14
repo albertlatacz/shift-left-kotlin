@@ -11,8 +11,8 @@ class GenerateReadme : ShiftLeftModulePlugin("generateReadme") {
         val outputFile = File(moduleDir, "README.md")
         val content = listOf(
             module(descriptor),
-            ci(descriptor),
-            team(descriptor)
+            ownership(descriptor),
+            dependencies(descriptor)
         ).joinToString("\n\n")
 
         outputFile.writeText(content)
@@ -20,14 +20,17 @@ class GenerateReadme : ShiftLeftModulePlugin("generateReadme") {
 }
 
 private fun module(descriptor: Descriptor) = """
-    # ${descriptor.module.name}    
+    # ${descriptor.module.name}
+        
+    ${descriptor.buildBadge()}
 """.trimIndent()
 
-private fun ci(descriptor: Descriptor) = """
-    ${descriptor.buildBadge("CI")}   
-""".trimIndent()
-
-private fun team(descriptor: Descriptor) = """
+private fun ownership(descriptor: Descriptor) = """
     ## Ownership
     This module is maintained by *${descriptor.team}*
+""".trimIndent()
+
+private fun dependencies(descriptor: Descriptor) = """
+    ## Dependencies
+    ${descriptor.dependencies.joinToString("\n") { "- ${it.fullName}" }}
 """.trimIndent()
