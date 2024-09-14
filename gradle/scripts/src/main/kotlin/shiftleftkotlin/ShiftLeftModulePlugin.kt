@@ -5,6 +5,7 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.findByType
 import shiftleftkotlin.Team.TEAM1
+import shiftleftkotlin.Team.UNASSIGNED
 import java.io.File
 
 abstract class ShiftLeftModulePlugin(protected val taskName: String) : Plugin<Project> {
@@ -20,7 +21,7 @@ abstract class ShiftLeftModulePlugin(protected val taskName: String) : Plugin<Pr
                 val module = Module(project.path)
                 processModule(
                     descriptor = Descriptor(
-                        team = extension.team.getOrElse(TEAM1),
+                        team = extension.team.getOrElse(UNASSIGNED),
                         module = module,
                         dependencies = project.allRuntimeDependencies()
                     ),
