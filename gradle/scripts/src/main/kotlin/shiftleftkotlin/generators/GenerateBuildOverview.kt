@@ -10,7 +10,7 @@ class GenerateBuildOverview : ShiftLeftModulePlugin("generateBuildOverview") {
             val file = File(root, "Builds.md")
             val existing = if (file.exists()) file.readLines() else emptyList()
 
-            val prefix = "- [![" + descriptor.module.path + "]"
+            val prefix = "- [![" + descriptor.module.fullName + "]"
             val lines = existing
                 .filter { it.startsWith("- ") }
                 .filterNot { it.startsWith(prefix) }

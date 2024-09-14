@@ -8,3 +8,7 @@ plugins {
 configure<ShiftLeftModule> {
     team.set(TEAM2)
 }
+
+dependencies {
+    implementation(project(":module1"))
+}

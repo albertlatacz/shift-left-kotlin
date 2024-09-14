@@ -44,6 +44,6 @@ private fun buildWithGradle(project: Descriptor): String {
           distribution: 'temurin'
           java-version: '21'
           cache: 'gradle'
-      - run: ./gradlew ${project.module.path}:check
+      - run: ./gradlew ${project.module.fullName}:check
 """
 }

@@ -9,5 +9,5 @@ fun Project.allRuntimeDependencies(): Set<Module> =
         .flatMap { it.allDependencies }
         .filterIsInstance<ProjectDependency>()
         .flatMap { listOf(Module(it.dependencyProject.path)) + it.dependencyProject.allRuntimeDependencies() }
-        .sortedBy { it.path }
+        .sortedBy { it.fullName }
         .toSet()

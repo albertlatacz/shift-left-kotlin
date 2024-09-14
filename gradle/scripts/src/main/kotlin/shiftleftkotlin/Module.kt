@@ -1,6 +1,7 @@
 package shiftleftkotlin
 
-data class Module(val path: String) {
-    val name get() = path.substringAfterLast(':')
-    val glob get() = "${path.drop(1).replace(':', '/')}/**"
+data class Module(val fullName: String) {
+    val name get() = fullName.substringAfterLast(':')
+    val homePath get() = fullName.drop(1).replace(':', '/')
+    val glob get() = "${homePath}/**"
 }

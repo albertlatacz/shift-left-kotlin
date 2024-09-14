@@ -20,7 +20,7 @@ abstract class ShiftLeftModulePlugin(protected val taskName: String) : Plugin<Pr
                 val module = Module(project.path)
                 processModule(
                     descriptor = Descriptor(
-                        owner = extension.team.getOrElse(TEAM1),
+                        team = extension.team.getOrElse(TEAM1),
                         module = module,
                         dependencies = project.allRuntimeDependencies()
                     ),
