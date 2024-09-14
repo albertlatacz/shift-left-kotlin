@@ -2,6 +2,7 @@ package shiftleftkotlin.generators
 
 import shiftleftkotlin.Descriptor
 import shiftleftkotlin.ShiftLeftModulePlugin
+import shiftleftkotlin.buildBadge
 import java.io.File
 
 class GenerateBuildOverview : ShiftLeftModulePlugin("generateBuildOverview") {
@@ -16,7 +17,7 @@ class GenerateBuildOverview : ShiftLeftModulePlugin("generateBuildOverview") {
                 .filterNot { it.startsWith(prefix) }
 
             val newLines = (lines +
-                    """$prefix(https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/${descriptor.module.name}-build.yml/badge.svg)](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/${descriptor.module.name}-build.yml)""".trimMargin()
+                    """- ${descriptor.buildBadge()}""".trimMargin()
                     ).sorted().joinToString("\n")
 
             val content = """# Build Overview
