@@ -17,7 +17,7 @@ class GenerateBuildOverview : ShiftLeftModulePlugin("generateBuildOverview") {
                 .filterNot { it.startsWith(prefix) }
 
             val newLines = (lines +
-                    """- ${descriptor.buildBadge()}""".trimMargin()
+                    """- ${descriptor.module.buildBadge()}""".trimMargin()
                     ).sorted().joinToString("\n")
 
             val content = """# Build Overview

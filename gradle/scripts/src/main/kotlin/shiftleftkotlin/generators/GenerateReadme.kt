@@ -3,6 +3,7 @@ package shiftleftkotlin.generators
 import shiftleftkotlin.Descriptor
 import shiftleftkotlin.ShiftLeftModulePlugin
 import shiftleftkotlin.buildBadge
+import shiftleftkotlin.vcsRoot
 import java.io.File
 
 class GenerateReadme : ShiftLeftModulePlugin("generateReadme") {
@@ -22,7 +23,7 @@ class GenerateReadme : ShiftLeftModulePlugin("generateReadme") {
 private fun module(descriptor: Descriptor) = """
     # ${descriptor.module.name}
         
-    ${descriptor.buildBadge()}
+    ${descriptor.module.buildBadge()}
 """.trimIndent()
 
 private fun ownership(descriptor: Descriptor) = """
@@ -32,5 +33,5 @@ private fun ownership(descriptor: Descriptor) = """
 
 private fun dependencies(descriptor: Descriptor) = """
     ## Dependencies
-    ${descriptor.dependencies.joinToString("\n") { "- ${it.fullName}" }}
+    ${descriptor.dependencies.joinToString("\n") { "- ${it.vcsRoot()} "}}
 """.trimIndent()

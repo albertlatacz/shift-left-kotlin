@@ -12,5 +12,8 @@ fun Project.allRuntimeDependencies(): Set<Module> =
         .sortedBy { it.fullName }
         .toSet()
 
-fun Descriptor.buildBadge(label: String = module.fullName) =
-    "[![$label](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/${module.name}-build.yml/badge.svg)](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/${module.name}-build.yml)"
+fun Module.buildBadge(label: String = fullName) =
+    "[![$label](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/${name}-build.yml/badge.svg)](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/${name}-build.yml)"
+
+fun Module.vcsRoot() =
+    "[$name](https://github.com/albertlatacz/shift-left-kotlin/${homePath})"
