@@ -6,4 +6,4 @@
 This module is maintained by *TEAM2*
 
 ## Dependencies
-- [module1](https://github.com/albertlatacz/shift-left-kotlin/module1) 
+- [module1](https://github.com/albertlatacz/shift-left-kotlin/tree/main/module1) 
