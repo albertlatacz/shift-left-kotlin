@@ -11,3 +11,6 @@ fun Project.allRuntimeDependencies(): Set<Module> =
         .flatMap { listOf(Module(it.dependencyProject.path)) + it.dependencyProject.allRuntimeDependencies() }
         .sortedBy { it.fullName }
         .toSet()
+
+fun Descriptor.buildBadge(label: String = module.fullName) =
+    "[![$label](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/${module.name}-build.yml/badge.svg)](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/${module.name}-build.yml)"

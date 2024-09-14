@@ -2,6 +2,7 @@ package shiftleftkotlin.generators
 
 import shiftleftkotlin.Descriptor
 import shiftleftkotlin.ShiftLeftModulePlugin
+import shiftleftkotlin.buildBadge
 import java.io.File
 
 class GenerateReadme : ShiftLeftModulePlugin("generateReadme") {
@@ -10,6 +11,7 @@ class GenerateReadme : ShiftLeftModulePlugin("generateReadme") {
         val outputFile = File(moduleDir, "README.md")
         val content = listOf(
             module(descriptor),
+            ci(descriptor),
             team(descriptor)
         ).joinToString("\n\n")
 
@@ -19,6 +21,10 @@ class GenerateReadme : ShiftLeftModulePlugin("generateReadme") {
 
 private fun module(descriptor: Descriptor) = """
     # ${descriptor.module.name}    
+""".trimIndent()
+
+private fun ci(descriptor: Descriptor) = """
+    ${descriptor.buildBadge("CI")}   
 """.trimIndent()
 
 private fun team(descriptor: Descriptor) = """
