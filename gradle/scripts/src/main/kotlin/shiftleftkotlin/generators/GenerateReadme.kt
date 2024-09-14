@@ -14,24 +14,25 @@ class GenerateReadme : ShiftLeftModulePlugin("generateReadme") {
             module(descriptor),
             ownership(descriptor),
             dependencies(descriptor)
-        ).joinToString("\n\n")
+        ).joinToString("\n")
 
         outputFile.writeText(content)
     }
 }
 
 private fun module(descriptor: Descriptor) = """
-    # ${descriptor.module.name}
+# ${descriptor.module.name}
         
-    ${descriptor.module.buildBadge()}
-""".trimIndent()
+${descriptor.module.buildBadge()}
+"""
 
 private fun ownership(descriptor: Descriptor) = """
-    ## Ownership
-    This module is maintained by *${descriptor.team}*
-""".trimIndent()
+## Ownership
+This module is maintained by *${descriptor.team}*
+"""
 
 private fun dependencies(descriptor: Descriptor) = """
-    ## Dependencies
-    ${descriptor.dependencies.joinToString("\n") { "- ${it.vcsRoot()} "}}
-""".trimIndent()
+## Dependencies
+
+${descriptor.dependencies.joinToString("\n") { "- ${it.vcsRoot()}"}}
+"""
