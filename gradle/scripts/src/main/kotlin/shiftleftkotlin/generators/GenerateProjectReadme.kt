@@ -5,13 +5,15 @@ import shiftleftkotlin.Descriptor
 import shiftleftkotlin.ShiftLeftProjectPlugin
 import shiftleftkotlin.buildBadge
 import java.io.File
+import kotlin.text.Typography.dollar
 
 class GenerateProjectReadme : ShiftLeftProjectPlugin("generateProjectReadme") {
     override fun processProject(project: Project, descriptors: List<Descriptor>) {
         val outputFile = File(project.rootDir, "README.md")
         val content = listOf(
             projectDescription(project),
-            buildOverview(descriptors)
+            buildOverview(descriptors),
+            dependencyDiagram(descriptors)
         ).joinToString("\n\n")
 
         outputFile.writeText(content)
@@ -35,3 +37,21 @@ private fun projectDescription(project: Project): String {
     """.trimMargin()
 
 }
+
+private fun dependencyDiagram(descriptors: List<Descriptor>): String {
+    println(" descriptors = ${ descriptors}")
+    return """
+        |```mermaid
+        |C4Context
+        |title System Interactions
+        |   UpdateLayoutConfig(${dollar}c4ShapeInRow="3")           
+        |   System(app, "app")
+        |   System(auth, "auth")        
+        |   Rel(app, auth, " ")
+        |   UpdateRelStyle(app, auth, ${dollar}lineColor="blue")        
+    |```
+    """.trimMargin()
+
+}
+
+
