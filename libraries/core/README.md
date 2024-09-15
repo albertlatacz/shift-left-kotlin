@@ -11,7 +11,7 @@ This module is maintained by *TEAM1*
 ## Dependencies
 none
 
-### Dependency Diagram
+## Dependency Diagram
 
 ```mermaid
 C4Context        

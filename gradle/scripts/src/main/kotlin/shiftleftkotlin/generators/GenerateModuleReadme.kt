@@ -14,7 +14,7 @@ class GenerateModuleReadme : ShiftLeftModulePlugin("generateModuleReadme") {
             module(descriptor),
             ownership(descriptor),
             dependencies(descriptor),
-            dependencyDiagram(listOf(descriptor))
+            dependencyDiagram(listOf(descriptor)+descriptor)
         ).joinToString("\n")
 
         outputFile.writeText(content)

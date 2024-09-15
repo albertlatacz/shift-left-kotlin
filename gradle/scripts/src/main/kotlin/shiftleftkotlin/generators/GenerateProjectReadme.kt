@@ -1,6 +1,7 @@
 package shiftleftkotlin.generators
 
 import org.gradle.api.Project
+import org.gradle.internal.impldep.org.eclipse.jgit.lib.ObjectChecker.type
 import shiftleftkotlin.Descriptor
 import shiftleftkotlin.ShiftLeftProjectPlugin
 import shiftleftkotlin.ModuleType
@@ -27,7 +28,7 @@ private fun buildOverview(descriptors: List<Descriptor>): String {
         .sortedBy { it.module.fullName }
         .joinToString("\n") { "- ${it.module.buildBadge()}" }
 
-    return """### Build Overview
+    return """## Build Overview
               |
               |${lines}""".trimMargin()
 }
@@ -45,8 +46,8 @@ fun dependencyDiagram(descriptors: List<Descriptor>): String {
         Undefined -> "Container"
     }
 
-    val actors = descriptors
-        .joinToString("\n") { """   ${it.module.type.asC4()}(${it.module.name}, "${it.module.name}")""" }
+    val actors = (descriptors.flatMap { listOf(it.module)+ it.dependencies }).distinct()
+        .joinToString("\n") { """   ${it.type.asC4()}(${it.name}, "${it.name}")""" }
 
     val relationships = descriptors
         .map { descriptor ->
@@ -62,7 +63,7 @@ fun dependencyDiagram(descriptors: List<Descriptor>): String {
         .joinToString("\n")
 
     return """
-        |### Dependency Diagram
+        |## Dependency Diagram
         |
         |```mermaid
         |C4Context        
