@@ -6,6 +6,8 @@ plugins {
     id("shiftleft-root")
 }
 
+apply(plugin = "shiftleft-project")
+
 buildscript {
     repositories {
         mavenCentral()

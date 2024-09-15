@@ -1,0 +1,3 @@
+package shiftleftkotlin
+
+interface ShiftLeftProject

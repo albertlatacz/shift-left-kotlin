@@ -1,30 +1,28 @@
 package shiftleftkotlin.generators
 
+import org.gradle.api.Project
 import shiftleftkotlin.Descriptor
-import shiftleftkotlin.ShiftLeftModulePlugin
+import shiftleftkotlin.ShiftLeftProjectPlugin
 import shiftleftkotlin.buildBadge
 import java.io.File
 
-class GenerateBuildOverview : ShiftLeftModulePlugin("generateBuildOverview") {
-    override fun processModule(descriptor: Descriptor, root: File) {
+class GenerateBuildOverview : ShiftLeftProjectPlugin("generateBuildOverview") {
+    override fun processProject(project: Project, descriptors: List<Descriptor>) {
         synchronized(taskName) {
-            val file = File(root, "Builds.md")
-            val existing = if (file.exists()) file.readLines() else emptyList()
+            project.logger.error(project.rootDir.toString())
+            val file = File(project.rootDir, "Builds.md")
 
-            val prefix = "- [![" + descriptor.module.fullName + "]"
-            val lines = existing
-                .filter { it.startsWith("- ") }
-                .filterNot { it.startsWith(prefix) }
+            project.logger.error("ASAAAA = ${descriptors}")
+            val lines = descriptors
+                .sortedBy { it.module.fullName }
+                .joinToString("\n") { "- ${it.module.buildBadge()}" }
 
-            val newLines = (lines +
-                    """- ${descriptor.module.buildBadge()}""".trimMargin()
-                    ).sorted().joinToString("\n")
-
-            val content = """# Build Overview
-                |
-                |$newLines
-            """.trimMargin()
-            file.writeText(content)
+            file.writeText(
+                """# Build Overview
+                   |
+                   |${lines}
+                """.trimMargin()
+            )
         }
     }
 }

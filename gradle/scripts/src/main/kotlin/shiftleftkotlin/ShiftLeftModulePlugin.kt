@@ -4,7 +4,6 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.findByType
-import shiftleftkotlin.Team.TEAM1
 import shiftleftkotlin.Team.UNASSIGNED
 import java.io.File
 
@@ -18,13 +17,8 @@ abstract class ShiftLeftModulePlugin(protected val taskName: String) : Plugin<Pr
 
         project.tasks.register(taskName) {
             doLast {
-                val module = Module(project.path)
                 processModule(
-                    descriptor = Descriptor(
-                        team = extension.team.getOrElse(UNASSIGNED),
-                        module = module,
-                        dependencies = project.allRuntimeDependencies()
-                    ),
+                    descriptor = descriptorFor(extension, project),
                     root = repoRootDir
                 )
             }
@@ -32,4 +26,12 @@ abstract class ShiftLeftModulePlugin(protected val taskName: String) : Plugin<Pr
     }
 
     abstract fun processModule(descriptor: Descriptor, root: File)
+}
+
+fun descriptorFor(module: ShiftLeftModule, project: Project): Descriptor {
+    return Descriptor(
+        team = module.team.getOrElse(UNASSIGNED),
+        module = Module(project.path),
+        dependencies = project.allRuntimeDependencies()
+    )
 }
