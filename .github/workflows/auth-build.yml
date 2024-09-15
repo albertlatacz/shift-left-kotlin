@@ -1,0 +1,21 @@
+name: auth-build
+on:
+  workflow_dispatch: 
+  push:
+    branches:
+      - main
+    paths:
+      - '*.kts'
+      - 'services/auth/**'
+      - '.github/workflows/auth-build.yml'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.0.0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'gradle'
+      - run: ./gradlew :services:auth:check

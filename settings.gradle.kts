@@ -7,3 +7,4 @@ pluginManagement {
 include("core")
 include("module1")
 include("module2")
+include("services:auth")

@@ -9,5 +9,5 @@ apply<GenerateReadme>()
 tasks {
     named("check").get().dependsOn(named("generateGitHubAction").get())
     named("check").get().dependsOn(named("generateBuildOverview").get())
-    named("check").get().dependsOn(named("generateReadme").get())
+    named("check").get().finalizedBy(named("generateReadme").get())
 }
