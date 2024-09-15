@@ -6,7 +6,7 @@ import shiftleftkotlin.buildBadge
 import shiftleftkotlin.vcsRoot
 import java.io.File
 
-class GenerateReadme : ShiftLeftModulePlugin("generateReadme") {
+class GenerateModuleReadme : ShiftLeftModulePlugin("generateModuleReadme") {
     override fun processModule(descriptor: Descriptor, root: File) {
         val moduleDir = File(root, descriptor.module.homePath)
         val outputFile = File(moduleDir, "README.md")

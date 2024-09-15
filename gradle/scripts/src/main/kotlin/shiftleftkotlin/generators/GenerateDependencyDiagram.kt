@@ -9,6 +9,9 @@ import java.io.File
 class GenerateDependencyDiagram : ShiftLeftProjectPlugin("generateDependencyDiagram") {
     override fun processProject(project: Project, descriptors: List<Descriptor>) {
 
-        project.logger.error("descriptors = ${descriptors}")
+        descriptors.forEach{
+            project.logger.error(it.module.fullName)
+        }
+
     }
 }

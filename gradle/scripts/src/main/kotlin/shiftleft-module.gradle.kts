@@ -1,11 +1,10 @@
-import shiftleftkotlin.generators.GenerateBuildOverview
 import shiftleftkotlin.generators.GenerateGitHubAction
-import shiftleftkotlin.generators.GenerateReadme
+import shiftleftkotlin.generators.GenerateModuleReadme
 
 apply<GenerateGitHubAction>()
-apply<GenerateReadme>()
+apply<GenerateModuleReadme>()
 
 tasks {
     named("check").get().dependsOn(named("generateGitHubAction").get())
-    named("check").get().finalizedBy(named("generateReadme").get())
+    named("check").get().finalizedBy(named("generateModuleReadme").get())
 }
