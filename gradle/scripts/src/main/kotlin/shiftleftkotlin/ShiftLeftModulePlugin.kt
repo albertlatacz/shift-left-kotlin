@@ -31,7 +31,8 @@ abstract class ShiftLeftModulePlugin(protected val taskName: String) : Plugin<Pr
 fun descriptorFor(module: ShiftLeftModule, project: Project): Descriptor {
     return Descriptor(
         team = module.team.getOrElse(UNASSIGNED),
-        module = Module(project.path),
+        module = project.asModule(),
         dependencies = project.allRuntimeDependencies()
     )
 }
+
