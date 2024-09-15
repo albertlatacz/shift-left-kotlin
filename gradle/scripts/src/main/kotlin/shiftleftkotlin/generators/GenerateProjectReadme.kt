@@ -38,7 +38,7 @@ private fun projectDescription(project: Project): String {
     """.trimMargin()
 }
 
-private fun dependencyDiagram(descriptors: List<Descriptor>): String {
+fun dependencyDiagram(descriptors: List<Descriptor>): String {
     fun ModuleType.asC4() = when (this) {
         Library -> "Component"
         Service -> "System"

@@ -13,7 +13,8 @@ class GenerateModuleReadme : ShiftLeftModulePlugin("generateModuleReadme") {
         val content = listOf(
             module(descriptor),
             ownership(descriptor),
-            dependencies(descriptor)
+            dependencies(descriptor),
+            dependencyDiagram(listOf(descriptor))
         ).joinToString("\n")
 
         outputFile.writeText(content)
