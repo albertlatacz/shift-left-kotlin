@@ -12,7 +12,7 @@ Example of shift-left engineering practices in Kotlin
 
 ```mermaid
 C4Context        
-   UpdateLayoutConfig($c4ShapeInRow="3")                           
+   UpdateLayoutConfig($c4ShapeInRow="2")                           
    Container(module1, "module1")
    Container(module2, "module2")
    Component(core, "core")

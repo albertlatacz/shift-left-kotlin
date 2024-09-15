@@ -66,7 +66,7 @@ private fun dependencyDiagram(descriptors: List<Descriptor>): String {
         |
         |```mermaid
         |C4Context        
-        |   UpdateLayoutConfig(${dollar}c4ShapeInRow="3")                           
+        |   UpdateLayoutConfig(${dollar}c4ShapeInRow="2")                           
         |$actors
         |$relationships                
     |```
