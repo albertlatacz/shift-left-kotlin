@@ -41,9 +41,10 @@ private fun projectDescription(project: Project): String {
 private fun dependencyDiagram(descriptors: List<Descriptor>): String {
     println(" descriptors = ${ descriptors}")
     return """
+        |### Dependency Diagram
+        |
         |```mermaid
-        |C4Context
-        |title System Interactions
+        |C4Context        
         |   UpdateLayoutConfig(${dollar}c4ShapeInRow="3")           
         |   System(app, "app")
         |   System(auth, "auth")        

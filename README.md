@@ -8,9 +8,10 @@ Example of shift-left engineering practices in Kotlin
 - [![:module2](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/module2-build.yml/badge.svg)](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/module2-build.yml)
 - [![:services:auth](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/auth-build.yml/badge.svg)](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/auth-build.yml)
 
+### Dependency Diagram
+
 ```mermaid
-C4Context
-title System Interactions
+C4Context        
    UpdateLayoutConfig($c4ShapeInRow="3")           
    System(app, "app")
    System(auth, "auth")        
