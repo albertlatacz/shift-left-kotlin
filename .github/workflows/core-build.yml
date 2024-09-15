@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - '*.kts'
-      - 'core/**'
+      - 'libraries/core/**'
       - '.github/workflows/core-build.yml'
 jobs:
   build:
@@ -18,4 +18,4 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
           cache: 'gradle'
-      - run: ./gradlew :core:check
+      - run: ./gradlew :libraries:core:check

@@ -8,6 +8,6 @@ configure<ShiftLeftModule> {
 }
 
 dependencies {
-    implementation(project(":core"))
+    implementation(project(":libraries:core"))
     implementation(project(":module1"))
 }

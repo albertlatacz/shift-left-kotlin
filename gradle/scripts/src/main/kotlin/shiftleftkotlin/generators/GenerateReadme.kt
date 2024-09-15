@@ -33,6 +33,10 @@ This module is maintained by *${descriptor.team}*
 
 private fun dependencies(descriptor: Descriptor) = """
 ## Dependencies
-
-${descriptor.dependencies.joinToString("\n") { "- ${it.vcsRoot()}"}}
+${
+    when {
+        descriptor.dependencies.isEmpty() -> "none"
+        else -> descriptor.dependencies.joinToString("\n") { "- ${it.vcsRoot()}"}
+    }
+}
 """
