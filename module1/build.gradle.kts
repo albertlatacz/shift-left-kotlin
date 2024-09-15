@@ -8,6 +8,7 @@ configure<ShiftLeftModule> {
 }
 
 dependencies {
+    implementation(project(":libraries:core"))
     implementation(platform("org.http4k:http4k-bom:5.29.0.0"))
     implementation(platform("org.http4k:http4k-connect-bom:5.23.0.0"))
     implementation("org.http4k:http4k-connect-amazon-s3")

@@ -7,6 +7,7 @@ on:
     paths:
       - '*.kts'
       - 'module1/**'
+      - 'libraries/core/**'
       - '.github/workflows/module1-build.yml'
 jobs:
   build:

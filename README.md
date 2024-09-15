@@ -19,6 +19,8 @@ C4Context
    System(auth, "auth")
    Rel(auth, core, " ") 
    UpdateRelStyle(auth, core, $lineColor="blue")
+   Rel(module1, core, " ") 
+   UpdateRelStyle(module1, core, $lineColor="blue")
    Rel(module2, core, " ") 
    UpdateRelStyle(module2, core, $lineColor="blue")
    Rel(module2, module1, " ") 
