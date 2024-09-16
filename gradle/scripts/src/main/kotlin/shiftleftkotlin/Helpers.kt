@@ -60,7 +60,7 @@ fun dependencyDiagram(descriptors: List<Descriptor>): String {
 fun builds(title: String, descriptors: Collection<Module>): String {
     val builds = when {
         descriptors.isNotEmpty() -> descriptors.groupBy { it.type }.map {
-            val typeLines = it.value.sortedBy { it.fullName }.joinToString("\n") { "- ${it.buildBadge()}" }
+            val typeLines = it.value.sortedBy { it.fullName }.joinToString("\n") { "- ${it.vcsRoot()} ${it.buildBadge()}" }
             """### ${it.key.name}
               |
               |$typeLines""".trimMargin()
