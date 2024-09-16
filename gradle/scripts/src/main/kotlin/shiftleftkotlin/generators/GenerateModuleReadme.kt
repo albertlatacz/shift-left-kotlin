@@ -1,9 +1,6 @@
 package shiftleftkotlin.generators
 
-import shiftleftkotlin.Descriptor
-import shiftleftkotlin.ShiftLeftModulePlugin
-import shiftleftkotlin.buildBadge
-import shiftleftkotlin.vcsRoot
+import shiftleftkotlin.*
 import java.io.File
 
 class GenerateModuleReadme : ShiftLeftModulePlugin("generateModuleReadme") {
@@ -13,7 +10,7 @@ class GenerateModuleReadme : ShiftLeftModulePlugin("generateModuleReadme") {
         val content = listOf(
             module(descriptor),
             ownership(descriptor),
-            dependencies(descriptor),
+            builds("Dependencies", descriptor.dependencies),
             dependencyDiagram(listOf(descriptor)+descriptor)
         ).joinToString("\n")
 
@@ -30,14 +27,4 @@ ${descriptor.module.buildBadge()}
 private fun ownership(descriptor: Descriptor) = """
 ## Ownership
 This module is maintained by *${descriptor.team}*
-"""
-
-private fun dependencies(descriptor: Descriptor) = """
-## Dependencies
-${
-    when {
-        descriptor.dependencies.isEmpty() -> "none"
-        else -> descriptor.dependencies.joinToString("\n") { "- ${it.vcsRoot()}"}
-    }
-}
 """
