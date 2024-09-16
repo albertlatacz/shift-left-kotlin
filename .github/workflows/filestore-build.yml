@@ -1,4 +1,4 @@
-name: auth-build
+name: filestore-build
 on:
   workflow_dispatch: 
   push:
@@ -6,9 +6,9 @@ on:
       - main
     paths:
       - '*.kts'
-      - 'services/auth/**'
+      - 'services/filestore/**'
       - 'libraries/core/**'
-      - '.github/workflows/auth-build.yml'
+      - '.github/workflows/filestore-build.yml'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,4 +19,4 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
           cache: 'gradle'
-      - run: ./gradlew :services:auth:check
+      - run: ./gradlew :services:filestore:check
