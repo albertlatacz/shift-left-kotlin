@@ -14,9 +14,12 @@ import org.http4k.core.Status.Companion.INTERNAL_SERVER_ERROR
 import org.http4k.core.Status.Companion.NOT_FOUND
 import org.http4k.core.Status.Companion.OK
 import org.http4k.core.Uri
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.http4k.strikt.bodyString
+import org.http4k.strikt.status
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import strikt.api.expectThat
+import strikt.assertions.isEqualTo
 
 class FileStoreServiceTest {
     private val credentials = { AwsCredentials("key", "secret") }
@@ -37,19 +40,19 @@ class FileStoreServiceTest {
 
     @Test
     fun `stores and retrieves a file`() {
-        assertEquals(app(Request(POST, Uri.of("/files/some/file")).body("File content")).status, OK)
-        assertEquals(app(Request(GET, Uri.of("/files/some/file"))).bodyString(), "File content")
+        expectThat(app(Request(POST, Uri.of("/files/some/file")).body("File content"))).status.isEqualTo(OK)
+        expectThat(app(Request(GET, Uri.of("/files/some/file")))).bodyString.isEqualTo("File content")
     }
 
     @Test
     fun `returns not found for invalid file`() {
-        assertEquals(app(Request(GET, Uri.of("/files/invalid"))).status, NOT_FOUND)
+        expectThat(app(Request(GET, Uri.of("/files/invalid")))).status.isEqualTo(NOT_FOUND)
     }
 
     @Test
     fun `returns error when underlying storage fails`() {
         s3Fake.misbehave(ReturnStatus(BAD_GATEWAY))
-        assertEquals(app(Request(GET, Uri.of("/files/invalid"))).status, INTERNAL_SERVER_ERROR)
+        expectThat(app(Request(GET, Uri.of("/files/invalid")))).status.isEqualTo(INTERNAL_SERVER_ERROR)
     }
 
 }
