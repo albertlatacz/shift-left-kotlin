@@ -1,4 +1,4 @@
-package shiftleftkotlin
+package shiftleftkotlin.api
 
 import org.http4k.core.Method.GET
 import org.http4k.core.Request

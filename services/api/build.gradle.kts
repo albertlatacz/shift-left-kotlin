@@ -9,8 +9,7 @@ configure<ShiftLeftModule> {
 
 dependencies {
     implementation(project(":libraries:core"))
-    implementation(platform("org.http4k:http4k-bom:5.29.0.0"))
     implementation("org.http4k:http4k-core")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.0")
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.11.0")
+
+    testImplementation(testFixtures(project(":libraries:core")))
 }

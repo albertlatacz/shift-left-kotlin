@@ -1,4 +1,4 @@
-package shiftleftkotlin
+package shiftleftkotlin.filestore
 
 import dev.forkhandles.result4k.valueOrNull
 import org.http4k.aws.AwsCredentials

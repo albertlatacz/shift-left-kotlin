@@ -3,6 +3,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
     kotlin("jvm") version "2.0.20"
+    `java-library`
+    `java-test-fixtures`
     id("shiftleft-root")
 }
 
@@ -21,6 +23,7 @@ allprojects {
     }
 
     apply(plugin = "kotlin")
+    apply(plugin = "java-test-fixtures")
 
     kotlin {
         jvmToolchain {
@@ -43,6 +46,23 @@ allprojects {
                 }
             }
         }
+    }
+    dependencies {
+        implementation(platform("org.http4k:http4k-bom:5.29.0.0"))
+        implementation(platform("org.http4k:http4k-connect-bom:5.23.0.0"))
+
+        testImplementation(platform("org.junit:junit-bom:5.11.0"))
+        testImplementation("org.junit.jupiter:junit-jupiter-api")
+        testImplementation("org.junit.jupiter:junit-jupiter-engine")
+        testImplementation("com.tngtech.archunit:archunit-junit5:1.3.0")
+        testImplementation("org.http4k:http4k-testing-strikt")
+
+        testFixturesImplementation(platform("org.http4k:http4k-bom:5.29.0.0"))
+        testFixturesImplementation(platform("org.junit:junit-bom:5.11.0"))
+        testFixturesImplementation("org.junit.jupiter:junit-jupiter-api")
+        testFixturesImplementation("org.junit.jupiter:junit-jupiter-engine")
+        testFixturesImplementation("com.tngtech.archunit:archunit-junit5:1.3.0")
+        testFixturesImplementation("org.http4k:http4k-testing-strikt")
     }
 }
 
