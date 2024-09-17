@@ -1,4 +1,4 @@
-package shiftleftkotlin
+package shiftleftkotlin.core
 
 import org.http4k.server.Http4kServer
 

@@ -1,4 +1,4 @@
-package shiftleftkotlin
+package shiftleftkotlin.core
 
 import com.tngtech.archunit.core.domain.JavaClass
 import com.tngtech.archunit.core.domain.JavaClasses

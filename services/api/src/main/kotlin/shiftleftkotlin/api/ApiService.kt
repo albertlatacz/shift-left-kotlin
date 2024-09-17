@@ -8,8 +8,8 @@ import org.http4k.routing.bind
 import org.http4k.routing.routes
 import org.http4k.server.SunHttp
 import org.http4k.server.asServer
-import shiftleftkotlin.Reminder
-import shiftleftkotlin.startAndDisplay
+import shiftleftkotlin.core.Reminder
+import shiftleftkotlin.core.startAndDisplay
 
 @Reminder(at = "2025-09-16", reason = "Should return json for all calls")
 fun apiService(): HttpHandler {
