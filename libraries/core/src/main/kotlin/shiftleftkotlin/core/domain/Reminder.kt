@@ -1,4 +1,4 @@
-package shiftleftkotlin.core
+package shiftleftkotlin.core.domain
 
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.CLASS)

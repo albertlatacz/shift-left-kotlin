@@ -1,4 +1,4 @@
-package shiftleftkotlin.filestore
+package shiftleftkotlin.filestore.application
 
 import dev.forkhandles.result4k.map
 import dev.forkhandles.result4k.recover

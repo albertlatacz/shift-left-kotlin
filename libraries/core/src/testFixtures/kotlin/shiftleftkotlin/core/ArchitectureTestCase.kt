@@ -14,6 +14,7 @@ import com.tngtech.archunit.library.Architectures
 import com.tngtech.archunit.library.Architectures.layeredArchitecture
 import com.tngtech.archunit.library.dependencies.SlicesRuleDefinition.slices
 import org.junit.jupiter.api.Test
+import shiftleftkotlin.core.domain.Reminder
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
 import java.io.File

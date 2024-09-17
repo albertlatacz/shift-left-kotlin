@@ -10,6 +10,7 @@ configure<ShiftLeftModule> {
 dependencies {
     implementation(project(":libraries:core"))
     implementation("org.http4k:http4k-core")
+    implementation("org.http4k:http4k-format-jackson")
 
     testImplementation(testFixtures(project(":libraries:core")))
 }
