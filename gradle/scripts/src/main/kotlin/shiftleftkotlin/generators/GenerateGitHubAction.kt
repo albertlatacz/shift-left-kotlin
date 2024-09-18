@@ -1,7 +1,6 @@
 package shiftleftkotlin.generators
 
 import shiftleftkotlin.Descriptor
-import shiftleftkotlin.Module
 import shiftleftkotlin.ShiftLeftModulePlugin
 import java.io.File
 
@@ -11,18 +10,18 @@ class GenerateGitHubAction : ShiftLeftModulePlugin("generateGitHubAction") {
         val target = actionsDir.resolve("${descriptor.module.name}-build.yml")
         target.writeText(
             listOf(
-                preamble(descriptor.module, descriptor.dependencies),
-                buildWithGradle(descriptor),
+                triggers(descriptor),
+                build(descriptor),
             ).joinToString("")
         )
     }
 }
 
-private fun preamble(module: Module, dependencies: Set<Module>): String {
-    val paths = listOf("*.kts", module.glob) +
-            dependencies.map { it.glob } +
-            ".github/workflows/${module.name}-build.yml"
-    return """name: ${module.name}-build
+private fun triggers(project: Descriptor): String {
+    val paths = listOf("*.kts", project.module.glob) +
+            project.dependencies.map { it.glob } +
+            ".github/workflows/${project.module.name}-build.yml"
+    return """name: ${project.module.name}-build
 on:
   workflow_dispatch: 
   push:
@@ -33,7 +32,7 @@ on:
 jobs:"""
 }
 
-private fun buildWithGradle(project: Descriptor): String {
+private fun build(project: Descriptor): String {
     return """
   build:
     runs-on: ubuntu-latest

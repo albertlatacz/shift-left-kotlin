@@ -65,14 +65,14 @@ interface ArchitectureTestCase {
     }
 
     @ArchTest
-    fun `check class code reminders has not expired`(classes: JavaClasses) {
+    fun `check class code reminders have not expired`(classes: JavaClasses) {
         classes()
             .that()
             .areAnnotatedWith(Reminder::class.java)
             .should(object : ArchCondition<JavaClass>("not be expired") {
                 override fun check(item: JavaClass, events: ConditionEvents) {
-                    val bomb = item.getAnnotationOfType(Reminder::class.java)
-                    checkCodeReminder(item, events, bomb)
+                    val reminder = item.getAnnotationOfType(Reminder::class.java)
+                    checkReminder(item, events, reminder)
                 }
             })
             .allowEmptyShould(true)
@@ -80,21 +80,21 @@ interface ArchitectureTestCase {
     }
 
     @ArchTest
-    fun `check method code reminders has not expired`(classes: JavaClasses) {
+    fun `check method code reminders have not expired`(classes: JavaClasses) {
         methods()
             .that()
             .areAnnotatedWith(Reminder::class.java)
             .should(object : ArchCondition<JavaMethod>("not be expired") {
                 override fun check(item: JavaMethod, events: ConditionEvents) {
-                    val bomb = item.getAnnotationOfType(Reminder::class.java)
-                    checkCodeReminder(item, events, bomb)
+                    val reminder = item.getAnnotationOfType(Reminder::class.java)
+                    checkReminder(item, events, reminder)
                 }
             })
             .allowEmptyShould(true)
             .check(classes)
     }
 
-    private fun checkCodeReminder(item: HasName, events: ConditionEvents, reminder: Reminder) {
+    private fun checkReminder(item: HasName, events: ConditionEvents, reminder: Reminder) {
         val remindAt = LocalDate.parse(reminder.at)
         if (remindAt.atStartOfDay().isBefore(LocalDateTime.now())) {
             val msg = "⏰ ${item.name} has expired: ${reminder.reason}"
