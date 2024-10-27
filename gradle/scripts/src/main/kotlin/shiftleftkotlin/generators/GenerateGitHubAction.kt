@@ -3,7 +3,6 @@ package shiftleftkotlin.generators
 import shiftleftkotlin.Descriptor
 import shiftleftkotlin.ShiftLeftModulePlugin
 import java.io.File
-import kotlin.text.Typography.dollar
 
 class GenerateGitHubAction : ShiftLeftModulePlugin("generateGitHubAction") {
     override fun processModule(descriptor: Descriptor, root: File) {
