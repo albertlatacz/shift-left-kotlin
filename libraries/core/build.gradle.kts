@@ -8,6 +8,6 @@ configure<ShiftLeftModule> {
 }
 
 dependencies {
-    implementation(platform("org.http4k:http4k-bom:5.29.0.0"))
+    implementation(platform("org.http4k:http4k-bom:5.33.0.1"))
     implementation("org.http4k:http4k-core")
 }
