@@ -20,3 +20,5 @@ jobs:
           java-version: '21'
           cache: 'gradle'
       - run: ./gradlew :services:api:check
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}

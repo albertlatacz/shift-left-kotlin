@@ -3,6 +3,7 @@ package shiftleftkotlin.generators
 import shiftleftkotlin.Descriptor
 import shiftleftkotlin.ShiftLeftModulePlugin
 import java.io.File
+import kotlin.text.Typography.dollar
 
 class GenerateGitHubAction : ShiftLeftModulePlugin("generateGitHubAction") {
     override fun processModule(descriptor: Descriptor, root: File) {
@@ -16,6 +17,8 @@ class GenerateGitHubAction : ShiftLeftModulePlugin("generateGitHubAction") {
         )
     }
 }
+
+private val dollar = "$"
 
 private fun triggers(project: Descriptor): String {
     val paths = listOf("*.kts", project.module.glob) +
@@ -44,5 +47,7 @@ private fun build(project: Descriptor): String {
           java-version: '21'
           cache: 'gradle'
       - run: ./gradlew ${project.module.fullName}:check
+        env:
+          SLACK_BOT_TOKEN: $dollar{{ secrets.SLACK_BOT_TOKEN }}
 """
 }
