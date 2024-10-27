@@ -38,7 +38,7 @@ private fun build(project: Descriptor): String {
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4.2.2
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v4.5.0
         with:
           distribution: 'temurin'
           java-version: '21'
