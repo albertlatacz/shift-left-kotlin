@@ -30,6 +30,6 @@ dependencies {
     api(gradleApi())
     api("org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.21")
 
-    testApi(platform("org.junit:junit-bom:5.11.0"))
+    testApi(platform("org.junit:junit-bom:5.11.3"))
     testApi("org.junit.jupiter:junit-jupiter-api")
 }
