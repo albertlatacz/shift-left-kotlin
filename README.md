@@ -37,5 +37,7 @@ C4Context
    Rel(e2e, filestore, " ") 
    UpdateRelStyle(e2e, filestore, $lineColor="blue")
    Rel(filestore, core, " ") 
-   UpdateRelStyle(filestore, core, $lineColor="blue")                
+   UpdateRelStyle(filestore, core, $lineColor="blue")
+   Rel(slack, core, " ") 
+   UpdateRelStyle(slack, core, $lineColor="blue")                
 ```
