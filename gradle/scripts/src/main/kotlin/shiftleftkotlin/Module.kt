@@ -6,6 +6,7 @@ data class Module(val fullName: String) {
     val type get() = when {
         fullName.contains(":libraries:") -> Library
         fullName.contains(":services:") -> Service
+        fullName.contains(":tests:") -> Tests
         else -> Undefined
     }
     val name get() = fullName.substringAfterLast(':')
