@@ -49,7 +49,7 @@ allprojects {
     }
     dependencies {
         implementation(platform("org.http4k:http4k-bom:5.29.0.0"))
-        implementation(platform("org.http4k:http4k-connect-bom:5.23.0.0"))
+        implementation(platform("org.http4k:http4k-connect-bom:5.25.1.0"))
 
         testImplementation(platform("org.junit:junit-bom:5.11.0"))
         testImplementation("org.junit.jupiter:junit-jupiter-api")
