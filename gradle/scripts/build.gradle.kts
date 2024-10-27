@@ -28,7 +28,7 @@ tasks {
 
 dependencies {
     api(gradleApi())
-    api("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.24")
+    api("org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.21")
 
     testApi(platform("org.junit:junit-bom:5.11.0"))
     testApi("org.junit.jupiter:junit-jupiter-api")
