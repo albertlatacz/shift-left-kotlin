@@ -7,6 +7,8 @@ import org.http4k.routing.routes
 import shiftleftkotlin.slack.domain.FakeSlackState
 import shiftleftkotlin.slack.domain.InMemoryFakeSlackState
 import shiftleftkotlin.slack.endpoints.SlackBearerAuth
+import shiftleftkotlin.slack.endpoints.chatPostMessage
+import shiftleftkotlin.slack.endpoints.conversationsHistory
 import shiftleftkotlin.slack.endpoints.conversationsList
 
 class FakeSlack(state: FakeSlackState = InMemoryFakeSlackState(), token: String) :
@@ -14,7 +16,9 @@ class FakeSlack(state: FakeSlackState = InMemoryFakeSlackState(), token: String)
 
     override val app = SlackBearerAuth(token).then(
         routes(
-            conversationsList(state)
+            conversationsList(state),
+            conversationsHistory(state),
+            chatPostMessage(state),
         )
     )
 }
