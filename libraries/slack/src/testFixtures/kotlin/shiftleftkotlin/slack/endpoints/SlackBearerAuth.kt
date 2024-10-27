@@ -10,14 +10,15 @@ import shiftleftkotlin.slack.domain.SlackFailure
 import shiftleftkotlin.slack.domain.SlackFailure.Companion.failureLens
 
 class SlackBearerAuth(private val token: String) : Filter {
-    override fun invoke(handler: HttpHandler): HttpHandler {
-        return {
-            try {
-                if (AUTH_HEADER(it) == token) handler(it)
-                else Response(OK).with(failureLens of SlackFailure("invalid_auth"))
-            } catch (e: Exception) {
-                Response(OK).with(failureLens of SlackFailure("error"))
+
+    override fun invoke(handler: HttpHandler): HttpHandler = {
+        try {
+            when (token) {
+                AUTH_HEADER(it) -> handler(it)
+                else -> Response(OK).with(failureLens of SlackFailure("invalid_auth"))
             }
+        } catch (e: Exception) {
+            Response(OK).with(failureLens of SlackFailure("error"))
         }
     }
 
