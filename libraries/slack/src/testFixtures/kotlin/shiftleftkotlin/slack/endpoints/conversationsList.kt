@@ -14,7 +14,7 @@ import shiftleftkotlin.slack.endpoints.ConversationsListResponse.Success
 fun conversationsList(state: FakeSlackState) =
     "/api/conversations.list" bind GET to {
         Response(OK).with(
-            successBody of Success(state.conversationsList())
+            successBody of Success(state.conversationsList().map { Conversation(it.channelId, it.name) })
         )
     }
 

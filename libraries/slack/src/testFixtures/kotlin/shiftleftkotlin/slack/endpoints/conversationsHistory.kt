@@ -20,7 +20,7 @@ fun conversationsHistory(state: FakeSlackState) =
             val channelId = it.query("channel") ?: throw SlackException("invalid_argument")
 
             Response(OK).with(
-                successBody of Success(state.conversationsHistory(channelId))
+                successBody of Success(state.conversationsHistory(channelId).map { Message(it.text) })
             )
         } catch (e: SlackException) {
             Response(OK).with(failureLens of SlackFailure(e.localizedMessage))
