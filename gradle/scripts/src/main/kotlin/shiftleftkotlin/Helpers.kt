@@ -26,7 +26,7 @@ fun dependencyDiagram(descriptors: List<Descriptor>): String {
     fun ModuleType.asC4() = when (this) {
         Library -> "Component"
         Service -> "System"
-        Tests -> "Container"
+        Test -> "Container"
         Undefined -> "Container"
     }
 

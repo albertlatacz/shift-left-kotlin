@@ -13,7 +13,7 @@ Example of shift-left engineering practices in Kotlin
 - [api](https://github.com/albertlatacz/shift-left-kotlin/tree/main/services/api) [![:services:api](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/api-build.yml/badge.svg)](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/api-build.yml)
 - [filestore](https://github.com/albertlatacz/shift-left-kotlin/tree/main/services/filestore) [![:services:filestore](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/filestore-build.yml/badge.svg)](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/filestore-build.yml)
 
-### Tests
+### Test
 
 - [e2e](https://github.com/albertlatacz/shift-left-kotlin/tree/main/tests/e2e) [![:tests:e2e](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/e2e-build.yml/badge.svg)](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/e2e-build.yml)
 

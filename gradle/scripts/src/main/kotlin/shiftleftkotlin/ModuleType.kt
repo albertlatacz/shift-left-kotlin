@@ -1,5 +1,5 @@
 package shiftleftkotlin
 
 enum class ModuleType {
-    Library, Service, Tests, Undefined
+    Library, Service, Test, Undefined
 }
