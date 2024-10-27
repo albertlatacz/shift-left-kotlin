@@ -6,6 +6,7 @@ Example of shift-left engineering practices in Kotlin
 ### Library
 
 - [core](https://github.com/albertlatacz/shift-left-kotlin/tree/main/libraries/core) [![:libraries:core](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/core-build.yml/badge.svg)](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/core-build.yml)
+- [slack](https://github.com/albertlatacz/shift-left-kotlin/tree/main/libraries/slack) [![:libraries:slack](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/slack-build.yml/badge.svg)](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/slack-build.yml)
 
 ### Service
 
@@ -19,6 +20,7 @@ Example of shift-left engineering practices in Kotlin
 C4Context        
    UpdateLayoutConfig($c4ShapeInRow="2")                           
    Component(core, "core")
+   Component(slack, "slack")
    System(api, "api")
    System(filestore, "filestore")
    Rel(api, core, " ") 

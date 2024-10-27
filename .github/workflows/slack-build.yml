@@ -1,0 +1,21 @@
+name: slack-build
+on:
+  workflow_dispatch: 
+  push:
+    branches:
+      - main
+    paths:
+      - '*.kts'
+      - 'libraries/slack/**'
+      - '.github/workflows/slack-build.yml'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - uses: actions/setup-java@v4.5.0
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'gradle'
+      - run: ./gradlew :libraries:slack:check

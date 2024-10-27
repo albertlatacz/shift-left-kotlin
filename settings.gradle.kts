@@ -5,5 +5,6 @@ pluginManagement {
 }
 
 include("libraries:core")
+include("libraries:slack")
 include("services:api")
 include("services:filestore")
