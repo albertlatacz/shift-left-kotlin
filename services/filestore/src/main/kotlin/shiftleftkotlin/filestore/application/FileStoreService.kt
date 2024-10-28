@@ -44,7 +44,7 @@ fun api(bucket: S3Bucket, events: Events): HttpHandler {
                             }
                         }
                     }.recover {
-                        events(FileDownloadFailed(path, "${it.status.code} ${it.message}"))
+                        events(FileDownloadFailed(path, "${it.status.code} ${it.message ?: ""}".trim()))
                         Response(INTERNAL_SERVER_ERROR)
                     }
             },
@@ -57,7 +57,7 @@ fun api(bucket: S3Bucket, events: Events): HttpHandler {
                         Response(OK)
                     }
                     .recover {
-                        events(FileUploadFailed(path, "${it.status.code} ${it.message}"))
+                        events(FileUploadFailed(path, "${it.status.code} ${it.message ?: ""}".trim()))
                         Response(INTERNAL_SERVER_ERROR)
                     }
 

@@ -53,12 +53,14 @@ class FileStoreServiceTest {
     @Test
     fun `returns not found for invalid file`() {
         expectThat(app(Request(GET, Uri.of("/files/invalid")))).status.isEqualTo(NOT_FOUND)
+        expectThat(events.all).contains(FileNotFound("invalid"))
     }
 
     @Test
     fun `returns error when underlying storage fails`() {
         s3Fake.misbehave(ReturnStatus(BAD_GATEWAY))
         expectThat(app(Request(GET, Uri.of("/files/invalid")))).status.isEqualTo(INTERNAL_SERVER_ERROR)
+        expectThat(events.all).contains(FileDownloadFailed("invalid", "502"))
     }
 
 }
