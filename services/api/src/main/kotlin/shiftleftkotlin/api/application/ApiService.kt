@@ -23,5 +23,7 @@ fun apiService(): HttpHandler {
 }
 
 fun main() {
-    apiService().asServer(SunHttp(9000)).startAndDisplay()
+    apiService()
+        .asServer(SunHttp(9000))
+        .startAndDisplay()
 }

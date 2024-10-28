@@ -33,7 +33,7 @@ class FileStoreServiceTest {
     private val s3Bucket = S3Bucket.Http(bucketName, region, credentials, s3Fake)
 
     private val events = TestEvents()
-    private val app = api(s3Bucket, events)
+    private val app = fileStoreApi(s3Bucket, events)
 
     @BeforeEach
     fun setup() {

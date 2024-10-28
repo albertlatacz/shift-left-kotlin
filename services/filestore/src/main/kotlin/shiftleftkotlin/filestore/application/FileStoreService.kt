@@ -15,8 +15,6 @@ import org.http4k.core.Status.Companion.INTERNAL_SERVER_ERROR
 import org.http4k.core.Status.Companion.NOT_FOUND
 import org.http4k.core.Status.Companion.OK
 import org.http4k.core.then
-import org.http4k.events.Event
-import org.http4k.events.EventCategory
 import org.http4k.events.Events
 import org.http4k.filter.ServerFilters.CatchAll
 import org.http4k.lens.Path
@@ -28,7 +26,7 @@ import shiftleftkotlin.core.adapters.JsonEvents
 import shiftleftkotlin.core.domain.ApplicationEvent
 import shiftleftkotlin.core.startAndDisplay
 
-fun api(bucket: S3Bucket, events: Events): HttpHandler {
+fun fileStoreApi(bucket: S3Bucket, events: Events): HttpHandler {
     val key = Path.of("key")
     return CatchAll {
         events(FileStoreError(it.toString()))
@@ -81,7 +79,7 @@ data class FileDownloadFailed(val path: String, val error: String) : Application
 data class FileNotFound(val path: String) : ApplicationEvent()
 
 fun main() {
-    api(S3Bucket.Http(BucketName.of("prod-bucket"), EU_WEST_2), JsonEvents())
+    fileStoreApi(S3Bucket.Http(BucketName.of("prod-bucket"), EU_WEST_2), JsonEvents())
         .asServer(SunHttp(9000))
         .startAndDisplay()
 }
