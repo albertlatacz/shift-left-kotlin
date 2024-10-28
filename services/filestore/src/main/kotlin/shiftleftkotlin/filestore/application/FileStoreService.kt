@@ -16,6 +16,7 @@ import org.http4k.core.Status.Companion.NOT_FOUND
 import org.http4k.core.Status.Companion.OK
 import org.http4k.core.then
 import org.http4k.events.Event
+import org.http4k.events.EventCategory
 import org.http4k.events.Events
 import org.http4k.filter.ServerFilters.CatchAll
 import org.http4k.lens.Path
@@ -24,12 +25,13 @@ import org.http4k.routing.routes
 import org.http4k.server.SunHttp
 import org.http4k.server.asServer
 import shiftleftkotlin.core.adapters.JsonEvents
+import shiftleftkotlin.core.domain.ApplicationEvent
 import shiftleftkotlin.core.startAndDisplay
 
 fun api(bucket: S3Bucket, events: Events): HttpHandler {
     val key = Path.of("key")
     return CatchAll {
-        events(ApiError(it.toString()))
+        events(FileStoreError(it.toString()))
         Response(INTERNAL_SERVER_ERROR)
     }.then(routes(
         "/files/{key:.*}" bind routes(
@@ -71,12 +73,12 @@ fun api(bucket: S3Bucket, events: Events): HttpHandler {
     ))
 }
 
-data class ApiError(val error: String) : Event
-data class FileUploadCompleted(val path: String) : Event
-data class FileUploadFailed(val path: String, val error: String) : Event
-data class FileDownloadStarted(val path: String) : Event
-data class FileDownloadFailed(val path: String, val error: String) : Event
-data class FileNotFound(val path: String) : Event
+data class FileStoreError(val error: String) : ApplicationEvent()
+data class FileUploadCompleted(val path: String) : ApplicationEvent()
+data class FileUploadFailed(val path: String, val error: String) : ApplicationEvent()
+data class FileDownloadStarted(val path: String) : ApplicationEvent()
+data class FileDownloadFailed(val path: String, val error: String) : ApplicationEvent()
+data class FileNotFound(val path: String) : ApplicationEvent()
 
 fun main() {
     api(S3Bucket.Http(BucketName.of("prod-bucket"), EU_WEST_2), JsonEvents())
