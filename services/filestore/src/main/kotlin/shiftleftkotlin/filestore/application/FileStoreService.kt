@@ -14,13 +14,17 @@ import org.http4k.core.Response
 import org.http4k.core.Status.Companion.INTERNAL_SERVER_ERROR
 import org.http4k.core.Status.Companion.NOT_FOUND
 import org.http4k.core.Status.Companion.OK
+import org.http4k.events.Event
+import org.http4k.events.Events
 import org.http4k.lens.Path
 import org.http4k.routing.bind
 import org.http4k.routing.routes
 import org.http4k.server.SunHttp
 import org.http4k.server.asServer
+import shiftleftkotlin.core.adapters.JsonEvents
+import shiftleftkotlin.core.startAndDisplay
 
-fun api(bucket: S3Bucket): HttpHandler {
+fun api(bucket: S3Bucket, events: Events): HttpHandler {
     val key = Path.of("key")
     return routes(
         "/files/{key:.*}" bind routes(
@@ -29,23 +33,47 @@ fun api(bucket: S3Bucket): HttpHandler {
                 bucket[BucketKey.of(path)]
                     .map {
                         when (it) {
-                            null -> Response(NOT_FOUND)
-                            else -> Response(OK).body(it)
+                            null -> {
+                                events(FileNotFound(path))
+                                Response(NOT_FOUND)
+                            }
+
+                            else -> {
+                                events(FileDownloadStarted(path))
+                                Response(OK).body(it)
+                            }
                         }
-                    }.recover { Response(INTERNAL_SERVER_ERROR) }
+                    }.recover {
+                        events(FileDownloadFailed(path, "${it.status.code} ${it.message}"))
+                        Response(INTERNAL_SERVER_ERROR)
+                    }
             },
 
             POST to {
-                bucket.set(BucketKey.of(key(it)), it.body.stream)
-                    .map { Response(OK) }
-                    .recover { Response(INTERNAL_SERVER_ERROR) }
+                val path = key(it)
+                bucket.set(BucketKey.of(path), it.body.stream)
+                    .map {
+                        events(FileUploadCompleted(path))
+                        Response(OK)
+                    }
+                    .recover {
+                        events(FileUploadFailed(path, "${it.status.code} ${it.message}"))
+                        Response(INTERNAL_SERVER_ERROR)
+                    }
 
             }
         )
     )
 }
 
+data class FileUploadCompleted(val path: String) : Event
+data class FileUploadFailed(val path: String, val error: String) : Event
+data class FileDownloadStarted(val path: String) : Event
+data class FileDownloadFailed(val path: String, val error: String) : Event
+data class FileNotFound(val path: String) : Event
+
 fun main() {
-    api(S3Bucket.Http(BucketName.of("prod-bucket"), EU_WEST_2)).asServer(SunHttp(9000)).start()
-        .also { println("Server started on http://localhost:" + it.port()) }
+    api(S3Bucket.Http(BucketName.of("prod-bucket"), EU_WEST_2), JsonEvents())
+        .asServer(SunHttp(9000))
+        .startAndDisplay()
 }

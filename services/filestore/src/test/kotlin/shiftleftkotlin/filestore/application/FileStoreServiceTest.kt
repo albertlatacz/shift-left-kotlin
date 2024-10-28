@@ -18,7 +18,9 @@ import org.http4k.strikt.bodyString
 import org.http4k.strikt.status
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import shiftleftkotlin.core.adapters.TestEvents
 import strikt.api.expectThat
+import strikt.assertions.contains
 import strikt.assertions.isEqualTo
 
 class FileStoreServiceTest {
@@ -30,7 +32,8 @@ class FileStoreServiceTest {
     private val s3Client = S3.Http(credentials, s3Fake)
     private val s3Bucket = S3Bucket.Http(bucketName, region, credentials, s3Fake)
 
-    private val app = api(s3Bucket)
+    private val events = TestEvents()
+    private val app = api(s3Bucket, events)
 
     @BeforeEach
     fun setup() {
@@ -41,7 +44,10 @@ class FileStoreServiceTest {
     @Test
     fun `stores and retrieves a file`() {
         expectThat(app(Request(POST, Uri.of("/files/some/file")).body("File content"))).status.isEqualTo(OK)
+        expectThat(events.all).contains(FileUploadCompleted("some/file"))
+
         expectThat(app(Request(GET, Uri.of("/files/some/file")))).bodyString.isEqualTo("File content")
+        expectThat(events.all).contains(FileDownloadStarted("some/file"))
     }
 
     @Test
