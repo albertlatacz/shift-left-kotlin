@@ -2,11 +2,8 @@ package shiftleftkotlin.filestore.application
 
 import dev.forkhandles.result4k.map
 import dev.forkhandles.result4k.recover
-import org.http4k.connect.amazon.core.model.Region.Companion.EU_WEST_2
-import org.http4k.connect.amazon.s3.Http
 import org.http4k.connect.amazon.s3.S3Bucket
 import org.http4k.connect.amazon.s3.model.BucketKey
-import org.http4k.connect.amazon.s3.model.BucketName
 import org.http4k.core.HttpHandler
 import org.http4k.core.Method.GET
 import org.http4k.core.Method.POST
@@ -20,11 +17,7 @@ import org.http4k.filter.ServerFilters.CatchAll
 import org.http4k.lens.Path
 import org.http4k.routing.bind
 import org.http4k.routing.routes
-import org.http4k.server.SunHttp
-import org.http4k.server.asServer
-import shiftleftkotlin.core.adapters.JsonEvents
 import shiftleftkotlin.core.domain.ApplicationEvent
-import shiftleftkotlin.core.startAndDisplay
 
 fun fileStoreApi(bucket: S3Bucket, events: Events): HttpHandler {
     val key = Path.of("key")
@@ -78,8 +71,3 @@ data class FileDownloadStarted(val path: String) : ApplicationEvent()
 data class FileDownloadFailed(val path: String, val error: String) : ApplicationEvent()
 data class FileNotFound(val path: String) : ApplicationEvent()
 
-fun main() {
-    fileStoreApi(S3Bucket.Http(BucketName.of("prod-bucket"), EU_WEST_2), JsonEvents())
-        .asServer(SunHttp(9000))
-        .startAndDisplay()
-}
