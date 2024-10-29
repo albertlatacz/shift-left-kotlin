@@ -12,6 +12,7 @@ This module is maintained by *TEAM1*
 ### Library
 
 - [core](https://github.com/albertlatacz/shift-left-kotlin/tree/main/libraries/core) [![:libraries:core](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/core-build.yml/badge.svg)](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/core-build.yml)
+- [slack](https://github.com/albertlatacz/shift-left-kotlin/tree/main/libraries/slack) [![:libraries:slack](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/slack-build.yml/badge.svg)](https://github.com/albertlatacz/shift-left-kotlin/actions/workflows/slack-build.yml)
 
 ### Service
 
@@ -25,10 +26,13 @@ C4Context
    UpdateLayoutConfig($c4ShapeInRow="2")                           
    Container(e2e, "e2e")
    Component(core, "core")
+   Component(slack, "slack")
    System(api, "api")
    System(filestore, "filestore")
    Rel(e2e, core, " ") 
    UpdateRelStyle(e2e, core, $lineColor="blue")
+   Rel(e2e, slack, " ") 
+   UpdateRelStyle(e2e, slack, $lineColor="blue")
    Rel(e2e, api, " ") 
    UpdateRelStyle(e2e, api, $lineColor="blue")
    Rel(e2e, filestore, " ") 

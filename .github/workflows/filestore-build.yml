@@ -8,6 +8,7 @@ on:
       - '*.kts'
       - 'services/filestore/**'
       - 'libraries/core/**'
+      - 'libraries/slack/**'
       - '.github/workflows/filestore-build.yml'
 jobs:
   build:
