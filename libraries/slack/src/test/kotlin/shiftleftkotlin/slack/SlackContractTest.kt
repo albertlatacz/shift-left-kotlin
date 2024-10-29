@@ -7,7 +7,6 @@ import org.http4k.lens.of
 import org.junit.jupiter.api.Assumptions.assumeTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.fail
-import shiftleftkotlin.slack.domain.Conversation
 import shiftleftkotlin.slack.domain.FakeConversation
 import shiftleftkotlin.slack.domain.InMemoryFakeSlackState
 import strikt.api.expectThat

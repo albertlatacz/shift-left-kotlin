@@ -61,5 +61,4 @@ class Slack(
 
 private data class SlackResponse(val ok: Boolean, val error: String? = null)
 private data class ConversationsListResponse(val channels: List<Conversation>)
-private data class ConversationsHistoryRequest(val channel: String)
 private data class ConversationsHistoryResponse(val messages: List<Message>)
