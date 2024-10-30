@@ -5,19 +5,21 @@ import org.http4k.core.Request
 import org.http4k.core.Status.Companion.OK
 import org.http4k.strikt.bodyString
 import org.http4k.strikt.status
+import org.http4k.testing.ApprovalTest
+import org.http4k.testing.Approver
+import org.http4k.testing.assertApproved
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
 
+@ExtendWith(ApprovalTest::class)
 class ApiServiceTest {
     private val app = apiService()
 
     @Test
-    fun `should pong`() {
-        val response = app(Request(GET, "/ping"))
-        expectThat(response).and {
-            status.isEqualTo(OK)
-            bodyString.isEqualTo("pong")
-        }
+    fun `serves upload page`(approver: Approver) {
+        approver.assertApproved(app(Request(GET, "/upload")))
     }
+
 }
