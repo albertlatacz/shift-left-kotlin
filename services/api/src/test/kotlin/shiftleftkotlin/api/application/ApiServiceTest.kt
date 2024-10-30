@@ -30,8 +30,7 @@ class ApiServiceTest {
     }
 
     @Test
-    fun `uploads file`(approver: Approver) {
-
+    fun `uploads file`() {
         val body = MultipartFormBody()
             .plus(
                 "file" to MultipartFormFile(
