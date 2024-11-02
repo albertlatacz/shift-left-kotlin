@@ -9,8 +9,8 @@ import org.http4k.core.Status.Companion.OK
 import org.http4k.core.Uri
 import org.http4k.core.then
 import org.http4k.core.with
+import org.http4k.filter.ClientFilters.BearerAuth
 import org.http4k.filter.ClientFilters.SetBaseUriFrom
-import org.http4k.filter.RequestFilters.SetHeader
 import org.http4k.format.Jackson
 import org.http4k.lens.Query
 import shiftleftkotlin.slack.domain.Conversation
@@ -22,6 +22,7 @@ class Slack(
     token: String,
     baseUrl: Uri = Uri.of("https://slack.com")
 ) {
+
     fun conversationsList(): List<Conversation> =
         http(Request(GET, "/api/conversations.list"))
             .assertSuccessfulResponse()
@@ -34,13 +35,13 @@ class Slack(
             .let(conversationsHistoryResponseLens)
             .messages
 
-    fun postMessage(conversationId: String, text: String) : Unit =
+    fun postMessage(conversationId: String, text: String): Unit =
         http(Request(POST, "/api/chat.postMessage").with(channelLens of conversationId, textLens of text))
             .assertSuccessfulResponse()
-            .let {  }
+            .let { }
 
     private val http = SetBaseUriFrom(baseUrl)
-        .then(SetHeader("Authorization", "Bearer $token"))
+        .then(BearerAuth { token })
         .then(handler)
 
     private fun Response.assertSuccessfulResponse(): Response {
