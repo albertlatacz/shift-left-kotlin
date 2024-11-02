@@ -10,9 +10,10 @@ import org.http4k.core.Status
 import org.http4k.routing.bind
 import org.http4k.routing.routes
 import shiftleftkotlin.core.domain.Reminder
+import shiftleftkotlin.slack.Slack
 
 @Reminder(at = "2025-09-16", reason = "Add health endpoint")
-fun apiService(fileStore: HttpHandler): HttpHandler {
+fun apiService(fileStore: HttpHandler, slack: Slack, channelName: String): HttpHandler {
     return routes(
         "/upload" bind GET to {
             Response(Status.OK).body("""
@@ -34,6 +35,7 @@ fun apiService(fileStore: HttpHandler): HttpHandler {
 
         "/upload" bind POST to {
             val file = MultipartFormBody.from(it).file("file")!!
+            slack.postMessage(channelName, "Uploaded ${file.filename}")
             fileStore(Request(POST, "/files/${file.filename}").body(file.content))
         }
     )

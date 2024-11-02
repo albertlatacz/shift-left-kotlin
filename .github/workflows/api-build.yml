@@ -8,6 +8,7 @@ on:
       - '*.kts'
       - 'services/api/**'
       - 'libraries/core/**'
+      - 'libraries/slack/**'
       - '.github/workflows/api-build.yml'
 jobs:
   build:

@@ -9,6 +9,7 @@ configure<ShiftLeftModule> {
 
 dependencies {
     testImplementation(testFixtures(project(":libraries:core")))
+    testImplementation(testFixtures(project(":libraries:slack")))
     testImplementation(project(":services:api"))
     testImplementation(project(":services:filestore"))
     testImplementation("org.http4k:http4k-core")

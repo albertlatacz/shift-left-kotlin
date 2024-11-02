@@ -11,10 +11,11 @@ import org.http4k.lens.MultipartFormFile
 import org.junit.jupiter.api.Assertions.fail
 import org.junit.jupiter.api.Test
 import shiftleftkotlin.e2e.environment.E2ETestEnvironment
+import shiftleftkotlin.slack.domain.FakeMessage
 import strikt.api.expectThat
+import strikt.assertions.contains
 import strikt.assertions.isEqualTo
 import strikt.assertions.isNotNull
-import java.time.Clock
 
 class FileUploadTest {
 
@@ -28,9 +29,9 @@ class FileUploadTest {
 
             uploadFile(fileName, fileContent)
             expectFileExistsInS3(fileName, fileContent)
+            expectSlackMessage("Uploaded $fileName")
         }
     }
-
 }
 
 private fun E2ETestEnvironment.uploadFile(name: String, content: String) {
@@ -50,4 +51,8 @@ private fun E2ETestEnvironment.expectFileExistsInS3(name: String, content: Strin
     expectThat(file).isNotNull().and {
         get { reader().readText() }.isEqualTo(content)
     }
+}
+
+private fun E2ETestEnvironment.expectSlackMessage(content: String) {
+    expectThat(slack.messagesList()).contains(FakeMessage(slackChannel, content))
 }

@@ -30,6 +30,8 @@ C4Context
    Container(e2e, "e2e")
    Rel(api, core, " ") 
    UpdateRelStyle(api, core, $lineColor="blue")
+   Rel(api, slack, " ") 
+   UpdateRelStyle(api, slack, $lineColor="blue")
    Rel(filestore, core, " ") 
    UpdateRelStyle(filestore, core, $lineColor="blue")
    Rel(filestore, slack, " ") 

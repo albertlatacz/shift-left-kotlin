@@ -15,5 +15,5 @@ dependencies {
 
     testImplementation(testFixtures(project(":libraries:core")))
 
-    testFixturesImplementation("org.http4k:http4k-testing-chaos")
+    testFixturesApi("org.http4k:http4k-testing-chaos")
 }

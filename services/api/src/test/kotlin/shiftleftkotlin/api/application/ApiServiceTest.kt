@@ -15,14 +15,18 @@ import org.http4k.testing.Approver
 import org.http4k.traffic.Sink.Companion.MemoryMap
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import shiftleftkotlin.slack.FakeSlack
+import shiftleftkotlin.slack.Slack
+import shiftleftkotlin.slack.domain.FakeMessage
 import strikt.api.expectThat
 import strikt.assertions.contains
 
 @ExtendWith(ApprovalTest::class)
 class ApiServiceTest {
     private val requests = mutableMapOf<Request, Response>()
+    private val slack = FakeSlack(token = "test")
     private val fileStorage = RecordTo(MemoryMap(requests)).then { Response(OK) }
-    private val app = apiService(fileStorage)
+    private val app = apiService(fileStorage, Slack(slack, "test"), "test-channel")
 
     @Test
     fun `serves upload page`(approver: Approver) {
@@ -32,13 +36,7 @@ class ApiServiceTest {
     @Test
     fun `uploads file`() {
         val body = MultipartFormBody()
-            .plus(
-                "file" to MultipartFormFile(
-                    "test.txt",
-                    OCTET_STREAM,
-                    "test file".byteInputStream()
-                )
-            )
+            .plus("file" to MultipartFormFile("test.txt", OCTET_STREAM, "test file".byteInputStream()))
 
         app(
             Request(POST, "/upload")
@@ -47,6 +45,7 @@ class ApiServiceTest {
         )
 
         expectThat(requests.keys).contains(Request(POST, "/files/test.txt").body("test file"))
+        expectThat(slack.messagesList()).contains(FakeMessage("test-channel", "Uploaded test.txt"))
     }
 
 }

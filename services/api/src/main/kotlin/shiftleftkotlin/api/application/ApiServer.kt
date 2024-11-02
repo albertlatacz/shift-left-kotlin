@@ -9,12 +9,15 @@ import org.http4k.format.Jackson
 import org.http4k.server.SunHttp
 import org.http4k.server.asServer
 import shiftleftkotlin.core.startAndDisplay
+import shiftleftkotlin.slack.Slack
 
 fun main() {
     val fileStore = SetBaseUriFrom(Uri.of("http://localhost:9001"))
         .then(JavaHttpClient())
 
-    apiService(fileStore)
+    val slack = Slack(JavaHttpClient(), "<token goes here>")
+
+    apiService(fileStore, slack, "shift-left-kotlin-tests")
         .asServer(SunHttp(9002))
         .startAndDisplay()
 }

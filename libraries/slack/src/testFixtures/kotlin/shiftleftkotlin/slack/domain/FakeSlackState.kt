@@ -3,6 +3,7 @@ package shiftleftkotlin.slack.domain
 interface FakeSlackState {
     fun add(conversation: FakeConversation)
     fun add(message: FakeMessage)
+    fun messagesList(): List<FakeMessage>
     fun conversationsList(): List<FakeConversation>
     fun conversationsHistory(channelId: String): List<FakeMessage>
 }
@@ -24,6 +25,9 @@ class InMemoryFakeSlackState : FakeSlackState {
 
     override fun conversationsList() =
         conversations
+
+    override fun messagesList() =
+        messages
 
     override fun conversationsHistory(channelId: String) =
         messages.filter { it.channelId == channelId }
