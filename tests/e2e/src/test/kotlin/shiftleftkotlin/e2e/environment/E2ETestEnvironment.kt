@@ -20,7 +20,7 @@ import java.time.Clock
 data class E2ETestEnvironment(
     val clock: Clock = Clock.systemUTC()
 ) {
-    private val events = TestEvents()
+    val events = TestEvents()
     private val credentials = { AwsCredentials("key", "secret") }
     private val region = EU_WEST_2
     private val bucketName = BucketName.of("test-bucket")
@@ -37,5 +37,5 @@ data class E2ETestEnvironment(
     val uploadBucket = S3Bucket.Http(bucketName, region, credentials, fakeS3)
 
     val fileStoreService = fileStoreService(uploadBucket, events)
-    val apiService = apiService(fileStoreService, Slack(slack, slackToken), slackChannel)
+    val apiService = apiService(events, fileStoreService, Slack(slack, slackToken), slackChannel)
 }

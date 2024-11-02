@@ -15,6 +15,7 @@ import org.http4k.testing.Approver
 import org.http4k.traffic.Sink.Companion.MemoryMap
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import shiftleftkotlin.core.adapters.TestEvents
 import shiftleftkotlin.slack.FakeSlack
 import shiftleftkotlin.slack.Slack
 import shiftleftkotlin.slack.domain.FakeMessage
@@ -23,10 +24,11 @@ import strikt.assertions.contains
 
 @ExtendWith(ApprovalTest::class)
 class ApiServiceTest {
+    private val events = TestEvents()
     private val requests = mutableMapOf<Request, Response>()
     private val slack = FakeSlack(token = "test")
     private val fileStorage = RecordTo(MemoryMap(requests)).then { Response(OK) }
-    private val app = apiService(fileStorage, Slack(slack, "test"), "test-channel")
+    private val app = apiService(events, fileStorage, Slack(slack, "test"), "test-channel")
 
     @Test
     fun `serves upload page`(approver: Approver) {
