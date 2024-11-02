@@ -19,7 +19,22 @@ import strikt.assertions.size
 import java.util.*
 
 abstract class SlackContractTest {
-    abstract val slack: Slack
+
+    @Test
+    fun `should get conversations history`() {
+        val messageText = "get-conversation-${UUID.randomUUID()}"
+
+        val conversation = (slack.conversationsList().find { it.name == testConversationName }
+            ?: fail("Could not find conversation"))
+
+        expectThat(slack.conversationsHistory(conversation.id))
+            .none { get { text }.isEqualTo(messageText) }
+
+        slack.postMessage(conversation.id, messageText)
+
+        expectThat(slack.conversationsHistory(conversation.id))
+            .any { get { text }.isEqualTo(messageText) }
+    }
 
     @Test
     fun `should list conversations`() {
@@ -43,24 +58,12 @@ abstract class SlackContractTest {
             ?: fail("Could not find conversation"))
 
         slack.postMessage(conversation.id, messageText)
-    }
-
-    @Test
-    fun `should get conversations history`() {
-        val messageText = "get-conversation-${UUID.randomUUID()}"
-
-        val conversation = (slack.conversationsList().find { it.name == testConversationName }
-            ?: fail("Could not find conversation"))
-
-        expectThat(slack.conversationsHistory(conversation.id))
-            .none { get { text }.isEqualTo(messageText) }
-
-        slack.postMessage(conversation.id, messageText)
 
         expectThat(slack.conversationsHistory(conversation.id))
             .any { get { text }.isEqualTo(messageText) }
-
     }
+
+    abstract val slack: Slack
 
     companion object {
         const val testConversationName = "shift-left-kotlin-tests"

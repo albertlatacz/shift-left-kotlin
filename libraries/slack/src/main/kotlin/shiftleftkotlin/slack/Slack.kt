@@ -17,23 +17,20 @@ import shiftleftkotlin.slack.domain.Conversation
 import shiftleftkotlin.slack.domain.Message
 import shiftleftkotlin.slack.domain.SlackException
 
-class Slack(
-    handler: HttpHandler,
-    token: String,
-    baseUrl: Uri = Uri.of("https://slack.com")
-) {
-
-    fun conversationsList(): List<Conversation> =
-        http(Request(GET, "/api/conversations.list"))
-            .assertSuccessfulResponse()
-            .let(conversationsListResponseLens)
-            .channels
+class Slack(handler: HttpHandler, token: String, baseUrl: Uri = Uri.of("https://slack.com")) {
 
     fun conversationsHistory(conversationId: String): List<Message> =
         http(Request(GET, "/api/conversations.history").with(channelLens of conversationId))
             .assertSuccessfulResponse()
             .let(conversationsHistoryResponseLens)
             .messages
+
+
+    fun conversationsList(): List<Conversation> =
+        http(Request(GET, "/api/conversations.list"))
+            .assertSuccessfulResponse()
+            .let(conversationsListResponseLens)
+            .channels
 
     fun postMessage(conversationId: String, text: String): Unit =
         http(Request(POST, "/api/chat.postMessage").with(channelLens of conversationId, textLens of text))
