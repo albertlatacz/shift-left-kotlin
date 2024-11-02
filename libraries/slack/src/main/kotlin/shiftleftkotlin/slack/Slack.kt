@@ -29,13 +29,13 @@ class Slack(
             .channels
 
     fun conversationsHistory(conversationId: String): List<Message> =
-        http(Request(GET, "/api/conversations.history").with(channelParam of conversationId))
+        http(Request(GET, "/api/conversations.history").with(channelLens of conversationId))
             .assertSuccessfulResponse()
             .let(conversationsHistoryResponseLens)
             .messages
 
     fun postMessage(conversationId: String, text: String) : Unit =
-        http(Request(POST, "/api/chat.postMessage").with(channelParam of conversationId, textParam of text))
+        http(Request(POST, "/api/chat.postMessage").with(channelLens of conversationId, textLens of text))
             .assertSuccessfulResponse()
             .let {  }
 
@@ -59,8 +59,8 @@ class Slack(
         private val responseLens = Jackson.autoBody<SlackResponse>().toLens()
         private val conversationsListResponseLens = Jackson.autoBody<ConversationsListResponse>().toLens()
         private val conversationsHistoryResponseLens = Jackson.autoBody<ConversationsHistoryResponse>().toLens()
-        private val channelParam = Query.required("channel")
-        private val textParam = Query.required("text")
+        private val channelLens = Query.required("channel")
+        private val textLens = Query.required("text")
 
         private data class SlackResponse(val ok: Boolean, val error: String? = null)
         private data class ConversationsListResponse(val channels: List<Conversation>)
