@@ -72,7 +72,7 @@ abstract class SlackContractTest {
 
 class RealSlackTest : SlackContractTest() {
     init {
-        assumeTrue(System.getenv("SLACK_BOT_TOKEN") != null)
+        assumeTrue(System.getenv(SLACK_BOT_TOKEN.meta.name) != null)
     }
 
     override val slack = Slack(JavaHttpClient(), SLACK_BOT_TOKEN(ENV))
