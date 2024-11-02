@@ -7,10 +7,6 @@ on:
     paths:
       - '*.kts'
       - 'tests/e2e/**'
-      - 'libraries/core/**'
-      - 'libraries/slack/**'
-      - 'services/api/**'
-      - 'services/filestore/**'
       - '.github/workflows/e2e-build.yml'
 jobs:
   build:

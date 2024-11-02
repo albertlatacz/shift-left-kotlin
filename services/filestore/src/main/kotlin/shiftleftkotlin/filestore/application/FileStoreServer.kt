@@ -10,7 +10,7 @@ import shiftleftkotlin.core.adapters.JsonEvents
 import shiftleftkotlin.core.startAndDisplay
 
 fun main() {
-    fileStoreApi(S3Bucket.Http(BucketName.of("prod-bucket"), Region.EU_WEST_2), JsonEvents())
+    fileStoreService(S3Bucket.Http(BucketName.of("prod-bucket"), Region.EU_WEST_2), JsonEvents())
         .asServer(SunHttp(9001))
         .startAndDisplay()
 }

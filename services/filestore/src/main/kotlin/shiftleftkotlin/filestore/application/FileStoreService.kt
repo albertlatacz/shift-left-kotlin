@@ -19,7 +19,7 @@ import org.http4k.routing.bind
 import org.http4k.routing.routes
 import shiftleftkotlin.core.domain.ApplicationEvent
 
-fun fileStoreApi(bucket: S3Bucket, events: Events): HttpHandler {
+fun fileStoreService(bucket: S3Bucket, events: Events): HttpHandler {
     val key = Path.of("key")
     return CatchAll {
         events(FileStoreError(it.toString()))

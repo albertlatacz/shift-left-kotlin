@@ -8,8 +8,11 @@ configure<ShiftLeftModule> {
 }
 
 dependencies {
-    implementation(platform("org.http4k:http4k-bom:5.33.0.1"))
-    implementation("org.http4k:http4k-core")
-    implementation(project(":services:api"))
-    implementation(project(":services:filestore"))
+    testImplementation(testFixtures(project(":libraries:core")))
+    testImplementation(project(":services:api"))
+    testImplementation(project(":services:filestore"))
+    testImplementation("org.http4k:http4k-core")
+    testImplementation("org.http4k:http4k-multipart")
+    testImplementation("org.http4k:http4k-testing-tracerbullet")
+    testImplementation("org.http4k:http4k-connect-amazon-s3-fake")
 }

@@ -14,7 +14,6 @@ import shiftleftkotlin.core.domain.Reminder
 @Reminder(at = "2025-09-16", reason = "Add health endpoint")
 fun apiService(fileStore: HttpHandler): HttpHandler {
     return routes(
-
         "/upload" bind GET to {
             Response(Status.OK).body("""
                 |<html>
