@@ -48,7 +48,7 @@ allprojects {
         }
     }
     dependencies {
-        implementation(platform("org.http4k:http4k-bom:5.35.1.0"))
+        implementation(platform("org.http4k:http4k-bom:5.35.5.0"))
         implementation(platform("org.http4k:http4k-connect-bom:5.35.1.0"))
         testImplementation(platform("org.junit:junit-bom:5.11.3"))
         testImplementation("org.junit.jupiter:junit-jupiter-api")
@@ -56,7 +56,7 @@ allprojects {
         testImplementation("com.tngtech.archunit:archunit-junit5:1.3.0")
         testImplementation("org.http4k:http4k-testing-strikt")
 
-        testFixturesImplementation(platform("org.http4k:http4k-bom:5.35.1.0"))
+        testFixturesImplementation(platform("org.http4k:http4k-bom:5.35.5.0"))
         testFixturesImplementation(platform("org.junit:junit-bom:5.11.3"))
         testFixturesImplementation("org.junit.jupiter:junit-jupiter-api")
         testFixturesImplementation("org.junit.jupiter:junit-jupiter-engine")
